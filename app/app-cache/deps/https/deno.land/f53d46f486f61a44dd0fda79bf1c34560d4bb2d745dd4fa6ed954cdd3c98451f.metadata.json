@@ -1,0 +1,35 @@
+{
+  "headers": {
+    "date": "Mon, 12 Jun 2023 19:05:00 GMT",
+    "via": "http/2 edgeproxy-h",
+    "cross-origin-resource-policy": "same-origin",
+    "age": "20988907",
+    "content-length": "491",
+    "etag": "\"e90479188d3930c3e390aec2a7a07bdf\"",
+    "x-amz-cf-id": "HnJzPxaxFYY6PBpD93Bpri_EVHHD1rFuGP8wcCOijX4Cb92-cCg2Bw==",
+    "x-amz-cf-pop": "AMS50-C1",
+    "x-amz-replication-status": "COMPLETED",
+    "x-cache": "Hit from cloudfront",
+    "x-content-type-options": "nosniff",
+    "x-amz-version-id": "rv2KYcmUNdbFes5YlpZ1us3nAABQ0dCk",
+    "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "cross-origin-opener-policy": "same-origin",
+    "server": "deno/gcp-europe-west4",
+    "access-control-allow-origin": "*",
+    "accept-ranges": "bytes",
+    "last-modified": "Fri, 25 Mar 2022 13:32:50 GMT",
+    "x-frame-options": "DENY",
+    "cache-control": "public, max-age=31536000, immutable",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "cross-origin-embedder-policy": "same-origin",
+    "server-timing": "fetchSource;dur=24",
+    "vary": "Accept-Encoding, Origin",
+    "content-type": "application/typescript; charset=utf-8"
+  },
+  "url": "https://deno.land/std@0.132.0/node/stream.ts",
+  "now": {
+    "secs_since_epoch": 1707585606,
+    "nanos_since_epoch": 566485292
+  }
+}

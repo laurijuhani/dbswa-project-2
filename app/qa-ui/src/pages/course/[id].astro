@@ -1,0 +1,12 @@
+---
+import Layout from "../../layout/Layout.astro";
+import Questions from "../../components/Questions.svelte";
+
+const id = Astro.params.id; 
+---
+
+
+<Layout>
+  <Questions course_id={id} client:only={"svelte"} />
+</Layout>
+
