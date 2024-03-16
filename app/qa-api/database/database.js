@@ -1,4 +1,5 @@
 import { postgres } from "../deps.js";
+
 const PGPASS = Deno.env.get("PGPASS").trim();
 const PGPASS_PARTS = PGPASS.split(":");
 
@@ -15,5 +16,8 @@ const sql = postgres({
   username,
   password,
 })
+
+// comment out upper part if you want to use docker instead of kuberentes
+//const sql = postgres({});
 
 export { sql }; 
