@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: qa-api-deployment
   labels:
-    app: app
+    app: qa-api
 spec:
   selector:
     matchLabels:
-      app: app
+      app: qa-api
   template:
     metadata:
       labels:
-        app: app
+        app: qa-api
     spec:
       containers:
-        - name: app
-          image: app:latest
+        - name: qa-api
+          image: qa-api:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 7777
