@@ -14,7 +14,7 @@ spec:
         app: llm-api
     spec:
       containers:
-        - name:llm-apii
+        - name: llm-api
           image: llm-api:latest
           imagePullPolicy: Never
           ports:
