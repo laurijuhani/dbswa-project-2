@@ -24,3 +24,12 @@ spec:
               cpu: 100m
             limits: 
               cpu: 200m
+        - name: nginx
+          image: nginx:latest
+          ports: 
+            - containerPort: 7800
+          resources: 
+            requests: 
+              cpu: 50m
+            limits: 
+              cpu: 100m 

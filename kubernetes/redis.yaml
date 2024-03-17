@@ -20,7 +20,7 @@ spec:
     image: redis:latest
     command:
       - redis-server
-      - "/redis-master/redis.conf"
+      - "/usr/local/etc/redis/redis.conf"
     env:
     - name: MASTER
       value: "true"
