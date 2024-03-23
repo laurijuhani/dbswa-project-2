@@ -26,6 +26,10 @@ spec:
               cpu: 200m
         - name: nginx
           image: nginx:latest
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/usr/sbin/nginx","-s","quit"]
           ports: 
             - containerPort: 7800
           resources: 
