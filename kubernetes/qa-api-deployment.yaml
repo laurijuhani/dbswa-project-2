@@ -18,7 +18,8 @@ spec:
           image: qa-api:latest
           imagePullPolicy: Never
           ports:
-            - containerPort: 7777
+            - name: http
+              containerPort: 7777
           resources:
             requests:
               cpu: 100m

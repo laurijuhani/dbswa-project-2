@@ -7,6 +7,6 @@ spec:
   ports:
     - port: 3000
       targetPort: 3000
-      protocol: TCP
+      protocol: "TCP"
   selector:
     app: qa-ui

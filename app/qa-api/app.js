@@ -3,12 +3,17 @@ import * as courseService from "./services/coursesService.js";
 import * as questionService from "./services/questionService.js"; 
 import * as answerService from "./services/answerService.js";
 import * as voteService from "./services/voteService.js";
-import { cacheMethodCalls } from "./util/cacheUtil.js";
+//import { cacheMethodCalls } from "./util/cacheUtil.js";
 
-const cachedQuestionService = cacheMethodCalls(questionService, ["addQuestion"]); 
-const cachedAnswerService = cacheMethodCalls(answerService, ["addAnswer"]); 
-const cachedCourseService = cacheMethodCalls(courseService, []); 
-const cachedVoteService = cacheMethodCalls(voteService, ["insertAnswerVote", "insertQuestionVote", "deleteVote"]);
+//const cachedQuestionService = cacheMethodCalls(questionService, ["addQuestion"]); 
+//const cachedAnswerService = cacheMethodCalls(answerService, ["addAnswer"]); 
+//const cachedCourseService = cacheMethodCalls(courseService, []); 
+//const cachedVoteService = cacheMethodCalls(voteService, ["insertAnswerVote", "insertQuestionVote", "deleteVote"]);
+
+const cachedCourseService = courseService; 
+const cachedQuestionService = questionService; 
+const cachedAnswerService = answerService;
+const cachedVoteService = voteService; 
 
 let controllers = new Set(); 
 const encoder = new TextEncoder();
@@ -117,7 +122,8 @@ const generateAnswers = async (question) => {
 
   // generate 3 answers using AI and sending it to client via SSE 
   for (let i = 0; i < 3; i++) {
-    const response = await fetch("http://llm-api:7000/", {
+    // NOTE: change this the line below if switching to docker instead of k8s "http://llm-api:7000/"
+    const response = await fetch("http://llm-api-service.svc.cluster.local:7000", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

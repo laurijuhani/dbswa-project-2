@@ -18,9 +18,10 @@ spec:
           image: llm-api:latest
           imagePullPolicy: Never
           ports:
-            - containerPort: 7000
+            - name: http
+              containerPort: 7000
           resources:
             requests:
-              cpu: 100m
+              cpu: 50m
             limits: 
-              cpu: 200m
+              cpu: 100m

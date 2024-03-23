@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: qa-api-service
 spec:
+  type: LoadBalancer
   ports:
     - port: 7777
-      targetPort: http
+      targetPort: 7777
       protocol: TCP
   selector:
     app: qa-api

@@ -1,2 +1,2 @@
 FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY backend-nginx.conf /etc/nginx/backend-nginx.conf
