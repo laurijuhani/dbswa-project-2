@@ -116,27 +116,31 @@ const sendQuestionSSE = (newQuestion) => {
 }; 
 
 const generateAnswers = async (question) => {
-  const data = {
-    question: question[0].question_text,
-  };
+  try {
+    const data = {
+      question: question[0].question_text,
+    };
 
-  // generate 3 answers using AI and sending it to client via SSE 
-  for (let i = 0; i < 3; i++) {
-    // NOTE: change this the line below if switching to docker instead of k8s "http://llm-api:7000/"
-    const response = await fetch("http://llm-api-service.svc.cluster.local:7000", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  
-    const responseBody = await response.json(); 
-  
-    const text = responseBody[0].generated_text.replace(data.question, '');
-    const answer = await cachedAnswerService.addAnswer(text, question[0].id, 'generated'); 
-    sendAnswerSSE(answer);
-  }; 
+    // generate 3 answers using AI and sending it to client via SSE 
+    for (let i = 0; i < 3; i++) {
+      // NOTE: change this the line below if switching to docker instead of k8s "http://llm-api:7000/"
+      const response = await fetch("http://llm-api/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    
+      const responseBody = await response.json(); 
+    
+      const text = responseBody[0].generated_text.replace(data.question, '');
+      const answer = await cachedAnswerService.addAnswer(text, question[0].id, 'generated'); 
+      sendAnswerSSE(answer);
+    }; 
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 const addAnswer = async (request) => {
