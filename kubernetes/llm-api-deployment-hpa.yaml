@@ -8,5 +8,5 @@ spec:
     kind: Deployment
     name: llm-api-deployment
   minReplicas: 1
-  maxReplicas: 2
+  maxReplicas: 1
   targetCPUUtilizationPercentage: 10

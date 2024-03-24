@@ -123,8 +123,7 @@ const generateAnswers = async (question) => {
 
     // generate 3 answers using AI and sending it to client via SSE 
     for (let i = 0; i < 3; i++) {
-      // NOTE: change this the line below if switching to docker instead of k8s "http://llm-api:7000/"
-      const response = await fetch("http://llm-api/", {
+      const response = await fetch("http://llm-api:7000/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
