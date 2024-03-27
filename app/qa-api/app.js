@@ -5,15 +5,10 @@ import * as answerService from "./services/answerService.js";
 import * as voteService from "./services/voteService.js";
 //import { cacheMethodCalls } from "./util/cacheUtil.js";
 
-//const cachedQuestionService = cacheMethodCalls(questionService, ["addQuestion"]); 
-//const cachedAnswerService = cacheMethodCalls(answerService, ["addAnswer"]); 
-//const cachedCourseService = cacheMethodCalls(courseService, []); 
-//const cachedVoteService = cacheMethodCalls(voteService, ["insertAnswerVote", "insertQuestionVote", "deleteVote"]);
-
-const cachedCourseService = courseService; 
-const cachedQuestionService = questionService; 
-const cachedAnswerService = answerService;
-const cachedVoteService = voteService; 
+const cachedQuestionService = cacheMethodCalls(questionService, ["addQuestion"]); 
+const cachedAnswerService = cacheMethodCalls(answerService, ["addAnswer"]); 
+const cachedCourseService = cacheMethodCalls(courseService, []); 
+const cachedVoteService = cacheMethodCalls(voteService, ["insertAnswerVote", "insertQuestionVote", "deleteVote"]);
 
 let controllers = new Set(); 
 const encoder = new TextEncoder();
