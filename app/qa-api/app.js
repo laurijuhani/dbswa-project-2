@@ -101,6 +101,8 @@ const addQuestion = async (request) => {
   }
 };
 
+// Send the question to the clients who are currently on the course page where
+// question was added
 const sendQuestionSSE = (newQuestion) => {
   const msg = encoder.encode(`data: ${JSON.stringify(newQuestion)}\n\n`);
     controllers.forEach((item) => {
@@ -165,6 +167,8 @@ const addAnswer = async (request) => {
   }
 }; 
 
+// Send the answer to the clients who are currently on the question page where
+// answer was added
 const sendAnswerSSE = (newAnswer) => {
   const msg = encoder.encode(`data: ${JSON.stringify(newAnswer)}\n\n`);
   controllers.forEach((item) => {
@@ -203,6 +207,7 @@ const vote = async (request) => {
   }
 };
 
+// adds the connection to a set which also stores the path that client is currently on 
 const openSSE = (request) => {
   const url = new URL(request.url); 
   const parts = url.pathname.split('/'); 
