@@ -2,7 +2,8 @@
 
 ## NOTE:
 - If qa-ui image gives error not finding app/dist/server/entry.mjs when trying to run in production just run `npm run build` inside qa-ui folder and it fixed it for me
-- don't know why it doesn't build it in dockerfile.prod. In kubectl and minikube it works fine, atleast for me. 
+- don't know why it doesn't always build it in dockerfile.prod. In kubectl and minikube it works fine, atleast for me. 
+- It would be best to run this project using Ubuntu with amd64 architecture where the configurations are mainly made. 
 
 # Installing neccessary dependecies 
 - In qa-ui folder run `npm install`
@@ -10,6 +11,7 @@
 # Development 
 - To run the application in development mode open terminal in the app directory 
   of the project and run `docker compose up`.
+- NOTE: After adding `deno adapter` to `qa-ui` for dynamic routes to work in production it somehow crashed the development build for apple silicon devices. So if you are using computer with Apple silicon processor and want to use this app in development mode I have made a folder in root directory called `docker_development_arm64` where there are `docker-compose.yml` and `astro.config.mjs` files, which you can use to start it development. 
 
 # Production 
 - To run the application in production mode open terminal in the app directory 
@@ -34,8 +36,18 @@
 - qa-ui: in `/app/qa-ui` run command `minikube image build -t qa-ui -f ./Dockerfile.prod .`
 
 # Configuring yaml files 
-- In root directory of the project run command `kubectl apply -f kubernetes/*.yaml`
+- In root directory of the project run command `kubectl apply -f kubernetes`
 
 # Exposing the application 
 - Please note that it can take several minutes before all the dpeloyments are ready. 
 - To be able to access the application outside the cluster run command `minikube service ingress-nginx-controller -n ingress-nginx --url`
+
+
+# Running monitoring
+- First run command `kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/bundle.yaml`
+- If the command gives error run `kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/bundle.yaml --force-conflicts=true --server-side=true`
+
+- Then run command in root directory `kubectl apply -f kubernetes/monitoring`
+- Next you can expose 'grafana' by running `kubectl port-forward svc/grafana 3000:3000`
+- The username and password are both `admin`
+- In order for grafana to get metrics from Prometheus check with command `kubectl get nodes -o wide` the internal IP of Prometheus-operator and add it to the datasource in grafana in format `http://<node_ip>:30900` then hit Save & Test
