@@ -43,7 +43,7 @@
 - To be able to access the application outside the cluster run command `minikube service ingress-nginx-controller -n ingress-nginx --url`
 
 
-# Running monitoring
+## Running monitoring
 - First run command `kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/bundle.yaml`
 - If the command gives error run `kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/bundle.yaml --force-conflicts=true --server-side=true`
 
@@ -51,3 +51,5 @@
 - Next you can expose 'grafana' by running `kubectl port-forward svc/grafana 3000:3000`
 - The username and password are both `admin`
 - In order for grafana to get metrics from Prometheus check with command `kubectl get nodes -o wide` the internal IP of Prometheus-operator and add it to the datasource in grafana in format `http://<node_ip>:30900` then hit Save & Test
+
+# Adding metrics
