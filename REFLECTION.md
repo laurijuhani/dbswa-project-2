@@ -2,7 +2,11 @@
 
 # Overview 
 
-G&A application where users can post questions on courses and answer to them as well. Users can also vote for each qurestion and answer once. There is also a cooldown for single user that they can't post another question/answer within minute. There is also a notification pop-up which gives information about the action user has made. 
+- G&A application where users can post questions on courses and answer to them as well. Users can also vote for each qurestion and answer once. 
+- There is a cooldown for single user that they can't post another question/answer within minute. 
+- There is also a notification pop-up which gives information about the action user has made. 
+- The page shows questions/answers sorted so that the most recent ones are on the top (posted or voted).
+- There is sample data in database which includes 4 courses and 23 questions on the first course (no AI generated answers for them)
 
 # Design decisions 
 
