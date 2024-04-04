@@ -44,12 +44,23 @@
 
 
 ## Running monitoring
-- First run command `kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/bundle.yaml`
-- If the command gives error run `kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/bundle.yaml --force-conflicts=true --server-side=true`
-
-- Then run command in root directory `kubectl apply -f kubernetes/monitoring`
-- Next you can expose 'grafana' by running `kubectl port-forward svc/grafana 3000:3000`
-- The username and password are both `admin`
-- In order for grafana to get metrics from Prometheus check with command `kubectl get nodes -o wide` the internal IP of Prometheus-operator and add it to the datasource in grafana in format `http://<node_ip>:30900` then hit Save & Test
-
-# Adding metrics
+- To run monitoring you need to have `helm` installed in your machine. Follow insctructions in this link `https://helm.sh/docs/intro/install/` to download helm if you don't have it already
+- After installing helm and cluster running run command `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts` and `helm repo update`
+- Then install prometheus to cluster with command `helm install prometheus prometheus-community/prometheus`
+- You need to expose prometheus with `kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-ext`
+- And open the application with `minikube service prometheus-server-ext`
+- The command gives you URL of prometheus
+- Then we need to install Grafana 
+- First run `helm repo add grafana https://grafana.github.io/helm-charts` and `helm repo update`
+- Then install grafana with `helm install grafana grafana/grafana`
+- Expose Grafana using command `kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext`
+- Then open the application with `minikube service grafana-ext`
+- The command gives you the URL of Grafana. Open the page. 
+- To login to Grafana you need password which you can get from terminal by running `kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo` 
+- Username is `admin`
+- When inside Grafana go into `Data sources` and add `Prometheus` data source. Grafana asks for the URL of the Prometheus and it is the first url which you got when you opened Prometheus application
+- Then click `Save & test`
+- After that you are rady to add dashboard to Grafana. 
+- Go to `Dashboards`and `add visualization` then click `import` and enter 315 and hit `Load`
+- Select `Prometheus` as a data source
+- Now you should have basic monitoring of the Kubernetes cluster
